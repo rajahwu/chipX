@@ -31,13 +31,13 @@ export default function Tweets({ tweets }: { tweets: TweetWithAuthor[] }) {
           schema: "public",
           table: "tweets",
         },
-        (payload) => {
+        () => {
           router.refresh();
         }
       )
       .subscribe();
 
-    return () => supabase.removeChannel(channel);
+    return () => { supabase.removeChannel(channel) };
   }, [supabase, router]);
 
   return optimisticTweets.map((tweet) => (
